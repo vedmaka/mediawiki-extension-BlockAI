@@ -1,0 +1,38 @@
+{
+	"name": "BlockAI",
+	"author": "Alexey <vedmaka>",
+	"version": "1.0.0",
+	"description": "Blocks AI",
+	"type": "hook",
+	"requires": {
+		"MediaWiki": ">= 1.39"
+	},
+	"license-name": "MIT",
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\BlockAI\\": "includes/"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "MediaWiki\\Extension\\BlockAI\\Hooks",
+			"services": [
+				"BlockAI"
+			]
+		}
+	},
+	"Hooks": {
+		"BeforeInitialize": "main"
+	},
+	"ServiceWiringFiles": [
+		"ServiceWiring.php"
+	],
+	"config": {
+		"BlockAIThreshold": {
+			"value": 1.0,
+			"description": "Threshold for blocking"
+		}
+	},
+	"MessagesDirs": {
+		"BlockAI": "i18n"
+	},
+	"manifest_version": 2
+}
