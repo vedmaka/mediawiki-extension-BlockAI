@@ -54,7 +54,7 @@ During request evaluation, every evaluation rule
 * [ExpensiveActions](includes/Evals/ExpensiveActions.php) - fails for requests that trigger expensive actions (anything except `view` and `info` are considered expensive)
 * [ForeignPosts](includes/Evals/ForeignPosts.php) - fails for requests that do POST but contain no Referrer header
 * [QueryParamsOrder](includes/Evals/QueryParamsOrder.php) - fails for requests that contain query parameters in a different order than expected by MediaWiki
-* [SpecialPageLock](includes/Evals/SpecialPageLock.php) - fails for requests that access Special: pages that are considered expensive. All the Special pages considered expensive except `UserLogin`, `CreateAccount`, `Search`, `Random`.
+* [SpecialPageLock](includes/Evals/SpecialPageLock.php) - fails for requests that access Special: pages that are considered expensive. All the Special pages considered expensive except `UserLogin`, `CreateAccount`, `Search`, `Random`, 'PasswordReset', `ConfirmEmail`.
 
 ## Adding custom evaluation rules
 

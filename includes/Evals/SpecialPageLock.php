@@ -15,7 +15,9 @@ class SpecialPageLock implements IEval {
 		'UserLogin',
 		'CreateAccount',
 		'Search',
-		'Random'
+		'Random',
+		'PasswordReset',
+		'ConfirmEmail'
 	];
 
 	public function __construct() {
