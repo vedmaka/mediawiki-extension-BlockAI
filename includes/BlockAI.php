@@ -42,7 +42,11 @@ class BlockAI {
 
 	/**
 	 * Determines if a request should be blocked based on the request score
-	 */
+	 * @param WebRequest $request The web request being evaluated
+	 * @param Title $title The title relevant to the evaluation
+	 * @param User $user The user related to the evaluation
+	 * @return bool
+	 **/
 	public final function shouldBlock( WebRequest $request, Title $title, User $user ): bool {
 		$reqip = $this->getReqIpSafe( $request );
 		$this->logger->info( "[$reqip] Evaluating request score for {$request->getRequestURL()}" );
