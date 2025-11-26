@@ -56,6 +56,12 @@ During request evaluation, every evaluation rule
 * [QueryParamsOrder](includes/Evals/QueryParamsOrder.php) - fails for requests that contain query parameters in a different order than expected by MediaWiki
 * [SpecialPageLock](includes/Evals/SpecialPageLock.php) - fails for requests that access Special: pages that are considered expensive. All the Special pages considered expensive except `UserLogin`, `CreateAccount`, `Search`, `Random`.
 
+## Adding custom evaluation rules
+
+You can add your own evaluation rules by creating new classes that implement the [IEval](includes/Evals/IEval.php) interface. The
+classes should be part of an extension, be loaded by the autoloader and registered through extension attributes. See
+https://github.com/vedmaka/mediawiki-extension-BlockAISample for more details and a sample custom evaluation rule.
+
 ## Blocked requests
 
 For the requests that were blocked the extension forced an early [HTTP 418 I am a teapot](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status/418) response.
