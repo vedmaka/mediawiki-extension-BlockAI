@@ -8,7 +8,8 @@ return [
 	'BlockAI' => static function ( MediaWikiServices $services ): BlockAI {
 		return new BlockAI(
 			$services->getMainConfig(),
-			LoggerFactory::getInstance( 'BlockAI' )
+			LoggerFactory::getInstance( 'BlockAI' ),
+			ExtensionRegistry::getInstance()
 		);
 	},
 ];

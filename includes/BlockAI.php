@@ -4,6 +4,7 @@ namespace MediaWiki\Extension\BlockAI;
 
 use Config;
 use Exception;
+use ExtensionRegistry;
 use MediaWiki\Extension\BlockAI\Evals\ExpensiveActions;
 use MediaWiki\Extension\BlockAI\Evals\ForeignPosts;
 use MediaWiki\Extension\BlockAI\Evals\IEval;
@@ -27,7 +28,7 @@ class BlockAI {
 
 	private float $threshold;
 
-	public function __construct( Config $config, LoggerInterface $logger ) {
+	public function __construct( Config $config, LoggerInterface $logger, ExtensionRegistry $extensionRegistry ) {
 		$this->config = $config;
 		$this->evals = [
 			new InvalidRequest(),
@@ -38,6 +39,20 @@ class BlockAI {
 		];
 		$this->logger = $logger;
 		$this->threshold = $this->config->get( 'BlockAIThreshold');
+
+		// Allow extension of the evals list through extension attributes
+		$extraEvals = $extensionRegistry->getAttribute( 'BlockAIEvals' );
+		if ( $extraEvals ) {
+			foreach ( $extraEvals as $evalName => $evalClass ) {
+				if ( class_exists( $evalClass ) ) {
+					$evalInstance = new $evalClass();
+					$this->evals[] = $evalInstance;
+					$this->logger->info( "BlockAI eval $evalName loaded" );
+				} else {
+					$this->logger->warning( "BlockAI eval $evalName not found, skipping" );
+				}
+			}
+		}
 	}
 
 	/**
